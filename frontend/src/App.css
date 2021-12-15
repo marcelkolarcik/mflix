@@ -1,0 +1,106 @@
+
+.dropdown-menu.show, .dropdown-bg {
+    background-color: #313636 !important;
+}
+
+input.form-control, span.input-group-text {
+    border: none !important;
+    border-radius: 0 !important;
+    background-color: #313636 !important;
+    color: #adb5bd !important;
+}
+
+.nav_link_color {
+    color: #adb5bd !important;
+    font-size: 0.85rem!important;
+}
+
+.nav_link_color:hover {
+    background-color: initial !important;
+    color: whitesmoke !important;
+}
+.register_btn{
+    font-size: 0.85rem!important;
+}
+.register_btn:hover {
+    background-color: #125a65 !important;
+}
+
+span.input-group-text {
+    color: #adb5bd;
+}
+
+.search_btn {
+    cursor: pointer;
+
+}
+
+.search_btn:hover {
+    background-color: #adb5bd !important;
+    color: #313636 !important;
+}
+
+a.dropdown-toggle.nav-link {
+    padding: 3px 8px !important;
+    margin: 0 5px !important;
+    font-size: 0.85rem;
+
+}
+
+a.dropdown-toggle.nav-link:hover {
+    background-color: #313636 !important;
+
+    border-radius: 3px !important;
+    margin: 0 5px !important;
+}
+
+.dropdown-item {
+    color: whitesmoke !important;
+    font-size: 0.9rem;
+}
+
+.dropdown-item:hover {
+    background-color: #4e5a5a !important;
+
+    border-radius: 3px !important;
+}
+
+.jumbo-hero {
+    height: 300px;
+    padding: 3rem;
+    background: linear-gradient(
+            180deg, rgba(35, 22, 32, 0.77), rgba(22, 28, 35, .77) 0, rgba(22, 28, 35, .97), #1c242c) ,url("bg.jpg") center;
+}
+.main-bg{
+    background-color: #1c242c;
+    height: 100%;
+}
+@media (prefers-reduced-motion: no-preference) {
+    .App-logo {
+        animation: App-logo-spin infinite 20s linear;
+    }
+}
+
+.App-header {
+    background-color: #282c34;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: calc(10px + 2vmin);
+    color: white;
+}
+
+.App-link {
+    color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
