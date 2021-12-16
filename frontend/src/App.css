@@ -12,16 +12,18 @@ input.form-control, span.input-group-text {
 
 .nav_link_color {
     color: #adb5bd !important;
-    font-size: 0.85rem!important;
+    font-size: 0.85rem !important;
 }
 
 .nav_link_color:hover {
     background-color: initial !important;
     color: whitesmoke !important;
 }
-.register_btn{
-    font-size: 0.85rem!important;
+
+.register_btn {
+    font-size: 0.85rem !important;
 }
+
 .register_btn:hover {
     background-color: #125a65 !important;
 }
@@ -69,12 +71,123 @@ a.dropdown-toggle.nav-link:hover {
     height: 300px;
     padding: 3rem;
     background: linear-gradient(
-            180deg, rgba(35, 22, 32, 0.77), rgba(22, 28, 35, .77) 0, rgba(22, 28, 35, .97), #1c242c) ,url("bg.jpg") center;
+            180deg, rgba(35, 22, 32, 0.77), rgba(22, 28, 35, .77) 0, rgba(22, 28, 35, .97), #1c242c), url("bg.jpg") center;
+
 }
-.main-bg{
+
+.main-bg {
     background-color: #1c242c;
+    min-height: 100vh;
     height: 100%;
 }
+.x-small{
+    font-size: 0.8rem;
+}
+.dark_bg{
+    background-color: #0e1117!important;
+}
+.lighter_bg{
+        background-color:  #1c242c!important;
+
+}
+
+.linda_bg{
+    /*background-color: #ff0c37;*/
+    color: #222d34;
+   background: linear-gradient(
+            120deg,
+            rgba(255, 1, 1, 0.89),
+            rgba(255, 0, 255, 0.77) ,
+            rgba(8, 255, 255, 0.89),
+            #19ff00);
+}
+.marcel_bg{
+    /*background-color: #ff0c37;*/
+    color: #222d34;
+   background: linear-gradient(
+            120deg,
+            rgba(199, 18, 32, 0.98),
+            rgba(29, 48, 170, 0.77),
+            rgba(239, 217, 14, 0.89),
+            #ee0d4c);
+}
+.movie_card, .search_card {
+    background-position: center center;
+    background-size: cover;
+    height: 300px;
+    max-width: 200px;
+    border-radius: 5px;
+
+}
+
+.movie_card_inset {
+    opacity: 0;
+    background-color: #1c242c;
+    width: 100%;
+    height: 100%;
+    border-radius: 5px;
+}
+
+.movie_card_inset:hover {
+    opacity: 90%;
+}
+
+.search_card {
+    background-position: center center;
+    background-size: cover;
+    width: auto;
+    height: 300px;
+    border-radius: 5px;
+}
+
+@media screen and (max-width: 768px) {
+    .movie_card, .search_card {
+        height: 200px;
+    }
+}
+
+.scroller-wrapper {
+    position: relative;
+    z-index: 2;
+    height: auto;
+    overflow-y: hidden;
+    background-color: red !important;
+}
+
+.scroller-wrapper .nav {
+    display: flex;
+    flex-wrap: nowrap;
+    margin-top: -1px;
+    overflow-x: auto;
+    color: rgba(255, 255, 255, .75);
+    padding-bottom: 50px;
+    /*white-space: nowrap;*/
+    -webkit-overflow-scrolling: touch;
+    background-color: #1c242c !important;
+
+}
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+.scroller-wrapper .nav::-webkit-scrollbar {
+    display: none;
+}
+
+.scroller-divider {
+    background-color: #897a7a;
+    padding: 1px;
+    margin: 60px 0;
+}
+
+.pointer {
+    cursor: pointer;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+.scroller-wrapper {
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
+}
+
 @media (prefers-reduced-motion: no-preference) {
     .App-logo {
         animation: App-logo-spin infinite 20s linear;

@@ -5,42 +5,83 @@ import NavDropdown from "react-bootstrap/NavDropdown";
 import Form from "react-bootstrap/Form";
 import InputGroup from "react-bootstrap/InputGroup";
 import FormControl from "react-bootstrap/FormControl";
-import React from "react";
+import React, {useEffect, useState} from "react";
+import {NavLink} from 'react-router-dom';
+import DropdownLink from "../ui/DropdownLink";
 
 export default function MainNav(props) {
-    const genres = props.genres
+    const genres = props.genres;
+    const [closeDropdown, setCloseDropdown] = useState(false);
+    const movieLinks = ['popular', 'top-rated', 'on-the-air'];
+
+    const tvLinks = ['tv-popular', 'tv-top-rated', 'tv-on-the-air'];
+
+    useEffect(() => {
+        if (closeDropdown) {
+            document.querySelector('div.dropdown-menu').classList.remove('show')
+        }
+
+    }, [closeDropdown])
+
+    function closeDrop() {
+        document.querySelector('div.dropdown-menu').classList.remove('show')
+        console.log(document.querySelector('div.dropdown-menu').classList)
+    }
+
     return (
         <Navbar expand={'md'} bg="dark" variant="dark">
             <Container>
-                <Navbar.Brand href="#home">mkflix</Navbar.Brand>
+                <NavLink
+                    className={'navbar navbar-brand'}
+                    to={`/`}>
+                    mkFLIX
+                </NavLink>
                 <Navbar.Toggle aria-controls="responsive-navbar-nav"/>
                 <Navbar.Collapse id="responsive-navbar-nav">
                     <Nav className="me-auto">
                         {/*<Link className='mx-3 nav-link text-light ' to={'/'}>Places to stay</Link>*/}
 
                         <NavDropdown title="Movies&nbsp;" id="navbarScrollingDropdown">
-                            <NavDropdown.Item href="#action2">Now playing</NavDropdown.Item>
-                            <NavDropdown.Item href="#action2">Top rated</NavDropdown.Item>
-                            <NavDropdown.Item href="#action4">Popular</NavDropdown.Item>
+                            {movieLinks.map((genre, idx) => (
+                                <div key={idx} className="col">
+                                    <NavLink
+
+                                        onClick={() => document.querySelector('div.dropdown-menu').classList.remove('show')}
+                                        className={'dropdown-item nav-link'}
+                                        to={`/search/${genre}`}>
+                                        {genre}
+                                    </NavLink>
+
+                                </div>
+                            ))}
 
 
                         </NavDropdown>
                         <NavDropdown title="TV Shows&nbsp;" id="navbarScrollingDropdown"
                                      className={'col-md-5 col-5'}>
+                            {tvLinks.map((genre, idx) => (
+                                <div key={idx} className="col">
+                                    <NavLink
 
-                            <NavDropdown.Item href="#action2">Top rated</NavDropdown.Item>
-                            <NavDropdown.Item href="#action4">Popular</NavDropdown.Item>
-                            <NavDropdown.Item href="#action4">On the air</NavDropdown.Item>
+                                        onClick={() => document.querySelector('div.dropdown-menu').classList.remove('show')}
+                                        className={'dropdown-item nav-link'}
+                                        to={`/search/${genre}`}>
+                                        {genre}
+                                    </NavLink>
 
+                                </div>
+                            ))}
 
                         </NavDropdown>
                         <NavDropdown title="Genres&nbsp;" id="navbarScrollingDropdown"
                                      className={' col-12'}>
 
+
                             <div className="row dropdown-bg g-0">
-                                {genres.map(genre => (
-                                    <div className="col-4">
-                                        <NavDropdown.Item href="#action4">{genre}</NavDropdown.Item>
+                                {genres.map((genre, idx) => (
+                                    <div key={idx} className="col-4">
+                                       <DropdownLink class={'dropdown-item nav-link'} searchTerm={genre} text={genre}/>
+
 
                                     </div>
                                 ))}
