@@ -11,7 +11,7 @@ export default function MovieCard(props) {
 
             <div className={props.class + ' pointer'}
                  style={{backgroundImage: `url(${movie.poster || img})`}}>
-                <div className="movie_card_inset d-flex align-items-start flex-column bd-highlight mb-3 text-light px-2"
+                <div className="movie_inset d-flex align-items-start flex-column bd-highlight mb-3 text-light px-2"
 
                 >
                     <p className="text-light small">

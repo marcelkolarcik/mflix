@@ -124,7 +124,7 @@ a.dropdown-toggle.nav-link:hover {
 
 }
 
-.movie_card_inset {
+.movie_inset {
     opacity: 0;
     background-color: #1c242c;
     width: 100%;
@@ -133,8 +133,8 @@ a.dropdown-toggle.nav-link:hover {
     transition: opacity 0.5s ease-in-out;
 }
 
-.movie_card_inset:hover {
-    opacity: 90%;
+.movie_inset:hover {
+    opacity: 0.9;
 }
 
 .search_card {
