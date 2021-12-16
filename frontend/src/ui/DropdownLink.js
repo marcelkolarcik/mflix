@@ -13,7 +13,7 @@ export default function DropdownLink(props) {
 
             onClick={closeDrop}
             className={props.class}
-            to={`/search/${props.searchTerm}`}>
+            to={`/search/${props.field}/${props.searchTerm}`}>
             {props.text}
         </NavLink>
     );

@@ -5,31 +5,36 @@ import NavDropdown from "react-bootstrap/NavDropdown";
 import Form from "react-bootstrap/Form";
 import InputGroup from "react-bootstrap/InputGroup";
 import FormControl from "react-bootstrap/FormControl";
-import React, {useEffect, useState} from "react";
-import {NavLink} from 'react-router-dom';
+import React, {useRef} from "react";
+import {NavLink, useNavigate} from 'react-router-dom';
 import DropdownLink from "../ui/DropdownLink";
 
 export default function MainNav(props) {
     const genres = props.genres;
-    const [closeDropdown, setCloseDropdown] = useState(false);
+
     const movieLinks = ['popular', 'top-rated', 'on-the-air'];
 
-    const tvLinks = ['tv-popular', 'tv-top-rated', 'tv-on-the-air'];
-
-    useEffect(() => {
-        if (closeDropdown) {
-            document.querySelector('div.dropdown-menu').classList.remove('show')
+    const tvLinks = ['popular', 'top-rated', 'on-the-air'];
+    const _search = useRef();
+    const navigate = useNavigate();
+    function onSearch() {
+        const searchTerm = _search.current.value
+        if(searchTerm){
+            navigate('/search/term/'+searchTerm)
+            _search.current.value = ''
         }
-
-    }, [closeDropdown])
-
-    function closeDrop() {
-        document.querySelector('div.dropdown-menu').classList.remove('show')
-        console.log(document.querySelector('div.dropdown-menu').classList)
+        else{
+            alert('Search term is missing')
+        }
+        console.log(_search.current.value)
     }
-
+    function onSubmit(e)
+    {
+        e.preventDefault();
+        onSearch();
+    }
     return (
-        <Navbar expand={'md'} bg="dark" variant="dark">
+        <Navbar expand={'md'} bg="dark" variant="dark" sticky={'top'}>
             <Container>
                 <NavLink
                     className={'navbar navbar-brand'}
@@ -42,31 +47,32 @@ export default function MainNav(props) {
                         {/*<Link className='mx-3 nav-link text-light ' to={'/'}>Places to stay</Link>*/}
 
                         <NavDropdown title="Movies&nbsp;" id="navbarScrollingDropdown">
-                            {movieLinks.map((genre, idx) => (
+                            {movieLinks.map((sort, idx) => (
                                 <div key={idx} className="col">
                                     <NavLink
 
                                         onClick={() => document.querySelector('div.dropdown-menu').classList.remove('show')}
                                         className={'dropdown-item nav-link'}
-                                        to={`/search/${genre}`}>
-                                        {genre}
+                                        to={`/search/movie/${sort}`}>
+                                        {sort}
                                     </NavLink>
 
                                 </div>
                             ))}
 
 
+
                         </NavDropdown>
                         <NavDropdown title="TV Shows&nbsp;" id="navbarScrollingDropdown"
                                      className={'col-md-5 col-5'}>
-                            {tvLinks.map((genre, idx) => (
+                            {tvLinks.map((sort, idx) => (
                                 <div key={idx} className="col">
                                     <NavLink
 
                                         onClick={() => document.querySelector('div.dropdown-menu').classList.remove('show')}
                                         className={'dropdown-item nav-link'}
-                                        to={`/search/${genre}`}>
-                                        {genre}
+                                        to={`/search/series/${sort}`}>
+                                        {sort}
                                     </NavLink>
 
                                 </div>
@@ -80,7 +86,7 @@ export default function MainNav(props) {
                             <div className="row dropdown-bg g-0">
                                 {genres.map((genre, idx) => (
                                     <div key={idx} className="col-4">
-                                       <DropdownLink class={'dropdown-item nav-link'} searchTerm={genre} text={genre}/>
+                                        <DropdownLink class={'dropdown-item nav-link'} field={'genres'} searchTerm={genre} text={genre}/>
 
 
                                     </div>
@@ -94,12 +100,14 @@ export default function MainNav(props) {
                     </Nav>
 
                     <Nav className="ms-auto">
-                        <Form className="d-flex">
+                        <Form className="d-flex" onSubmit={onSubmit}>
                             <InputGroup>
 
-                                <FormControl id="inlineFormInputGroup" placeholder="Search"
+                                <FormControl id="inlineFormInputGroup"
+                                             ref={_search}
+                                             placeholder="Search"
                                              className={'dropdown-bg'}/>
-                                <InputGroup.Text className={'search_btn'}>&#x1F50E;</InputGroup.Text>
+                                <InputGroup.Text className={'search_btn'} onClick={onSearch}>&#x1F50E;</InputGroup.Text>
                             </InputGroup>
                             <Form.Label htmlFor="inlineFormInputGroup" visuallyHidden>
                                 Search

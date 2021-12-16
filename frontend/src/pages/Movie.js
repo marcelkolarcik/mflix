@@ -1,11 +1,12 @@
 import React, {useEffect, useState} from "react";
-import {useParams} from "react-router-dom";
+import {NavLink, useParams} from "react-router-dom";
 import Hero from "../components/Hero";
 import Placeholder from "react-bootstrap/Placeholder";
 import Card from "react-bootstrap/Card";
 import MovieTitle from "../components/HeroTitles/MovieTitle";
 import defaultImg from "../ui/images/PlaceholderImage.svg";
 import RatingStars from "../ui/RatingStars";
+import SearchLink from "../ui/SearchLink";
 
 
 export default function Movie() {
@@ -57,7 +58,12 @@ export default function Movie() {
                                 <div className="col-md-10">
                                     <div className="card-body p-0 m-0 px-4">
                                         <h3 className="card-title text-light pt-0 mt-0">
-                                            {movie.title} ({movie.year})<>&nbsp;</>
+                                            {movie.title} (<NavLink
+                                            className={'text-info'}
+                                            to={`/search/year/${movie.year}`}>
+                                            {movie.year}
+                                        </NavLink>)<>&nbsp;</>
+
 
                                         </h3>
                                         <p className="p-0 m-0 ">
@@ -67,25 +73,45 @@ export default function Movie() {
                                         </p>
 
                                         <p className=" fst-italic small my-3 ">{movie.fullplot}</p>
-                                        <p className={' small m-0 px-1 py-1 text-light'}>Writers: {movie.writers.join(',')}</p>
-                                        <p className={'lighter_bg small m-0 px-1 py-1 text-light'}>
-                                            Released: {movie.released.toLocaleString().split('00:00:00 GMT')[0]}</p>
+
+                                        {movie.writers ?
+                                            <p className={' small m-0 px-1 py-1 text-light'}>
+                                                Writers: <SearchLink field={'writers'} array={movie.writers}/></p> : ''}
+
+                                        {movie.directors ?
+                                            <p className={' small m-0 px-1 py-1 text-light'}>Directors: <SearchLink
+                                                field={'directors'} array={movie.directors}/></p> : ''}
+
+                                        {movie.released ? <p className={'lighter_bg small m-0 px-1 py-1 text-light'}>
+                                            Released: {movie.released.toLocaleString().split('00:00:00 GMT')[0]}</p> : ''}
+
                                         <p className={' small m-0 px-1 py-1 text-light'}>Runtime: {movie.runtime} min</p>
-                                        <p className={'lighter_bg small m-0 px-1 py-1 text-light'}>Genres: {movie.genres.join(',')}</p>
-                                        <p className={' small m-0 px-1 py-1 text-light'}>Stars: {movie.cast.join(',')}</p>
+
+                                        <p className={'lighter_bg small m-0 px-1 py-1 text-light'}>Genres: <SearchLink
+                                            field={'genres'} array={movie.genres}/>
+                                        </p>
+
+                                        <p className={' small m-0 px-1 py-1 text-light'}>Stars: <SearchLink
+                                            field={'cast'} array={movie.cast}/>
+                                        </p>
 
                                         {movie.tomatoes ?
                                             <>
-                                            <p className={'lighter_bg small m-0 px-1 py-1 text-light'}>Production: {movie.tomatoes.production}
-                                            <a className={'float-end pe-1 text-muted text-decoration-none'}
-                                               rel="noreferrer"
-                                               target={'_blank'} href={movie.tomatoes.website}>website</a>
-                                        </p>
-                                        <p className={' small m-0 px-1 py-1 text-light'}>Consensus: {movie.tomatoes.consensus}</p>
-                                        <p className={'lighter_bg small m-0 px-1 py-1 text-light'}>Box
-                                            office: {movie.tomatoes.boxOffice}</p>
+                                                <p className={'lighter_bg small m-0 px-1 py-1 text-light'}>
+                                                    Production: <NavLink
+                                                        className={'text-info'}
+                                                        to={`/search/production/${movie.tomatoes.production}`}>
+                                                        {movie.tomatoes.production}
+                                                    </NavLink>
+                                                    <a className={'float-end pe-1 text-muted text-decoration-none'}
+                                                       rel="noreferrer"
+                                                       target={'_blank'} href={movie.tomatoes.website}>website</a>
+                                                </p>
+                                                <p className={' small m-0 px-1 py-1 text-light'}>Consensus: {movie.tomatoes.consensus}</p>
+                                                <p className={'lighter_bg small m-0 px-1 py-1 text-light'}>Box
+                                                    office: {movie.tomatoes.boxOffice}</p>
                                             </>
-                                            :''}
+                                            : ''}
 
 
                                     </div>
@@ -94,7 +120,7 @@ export default function Movie() {
                         </div>
                         <div className="card dark_bg mt-5 p-4">
                             <h4 className={'text-light'}>Comments ({comments.length})</h4>
-                            {comments.map((comment,idx)=>(
+                            {comments.map((comment, idx) => (
                                 <div key={idx} className={'border-bottom border-secondary mb-3'}>
                                     <p className="small text-muted p-0 m-0">{comment.name} - {comment.date.split('T')[0]}</p>
                                     <p className={'fst-italic text-light'}>{comment.text}</p>

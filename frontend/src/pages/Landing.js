@@ -10,11 +10,17 @@ export default function Landing(props) {
             <Hero title={<HeroTitle/>}/>
             <div className="main-bg ">
 
-                <MovieScroller id={'popular'} title={'Popular'} link={'/popular'} movies={movies}/>
+                <MovieScroller id={'popular'} title={'Popular'} link={'/search/movie/popular'} movies={movies}/>
 
-                <MovieScroller id={'top_rated'} title={'Top rated'} link={'/popular'} movies={movies}/>
+                <MovieScroller id={'top_rated'} title={'Top rated'} link={'/search/movie/top-rated'} movies={movies}/>
 
-                <MovieScroller id={'on_the_air'} title={'On the air'} link={'/popular'} movies={movies}/>
+                <MovieScroller id={'on_the_air'} title={'On the air'} link={'/search/movie/on-the-air'} movies={movies}/>
+
+                 <MovieScroller id={'popular'} title={'TV Popular'} link={'/search/series/popular'} movies={movies}/>
+
+                <MovieScroller id={'top_rated'} title={'TV Top rated'} link={'/search/series/top-rated'} movies={movies}/>
+
+                <MovieScroller id={'on_the_air'} title={'TV On the air'} link={'/search/series/on-the-air'} movies={movies}/>
 
             </div>
         </>);

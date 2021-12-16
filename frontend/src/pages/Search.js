@@ -10,7 +10,7 @@ export default function Search() {
     const [movies, setMovies] = useState([]);
     useEffect(() => {
         setMovies([])
-        fetch('/api/search/' + search.term)
+        fetch('/api/search/' + search.field +'/'+search.term)
             .then(response => {
                 if (response.status === 200) {
                     return response.json();
@@ -24,7 +24,7 @@ export default function Search() {
     return (
 
         <>
-            <Hero title={<SearchTitle searchTerm={search.term}/>}/>
+            <Hero title={<SearchTitle searchTerm={search.field +' : '+search.term}/>}/>
             <div className="main-bg pb-5">
 
                 <SearchResults movies={movies}/>

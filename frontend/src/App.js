@@ -31,7 +31,7 @@ function App() {
 
             <Routes>
                 <Route path={'/'} element={<Landing movies={movies}/>}/>
-                <Route path={`/search/:term`} element={<Search/>}/>
+                <Route path={`/search/:field/:term`} element={<Search/>}/>
                 <Route path={`/movie/:movieId`} element={<Movie/>}/>
             </Routes>
 

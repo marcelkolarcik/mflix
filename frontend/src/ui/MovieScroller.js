@@ -8,7 +8,7 @@ export default function MovieScroller(props) {
         <div className="container">
 
 
-            <MovieScrollerTitleNav parent_id={props.id} title={props.title}/>
+            <MovieScrollerTitleNav parent_id={props.id} title={props.title} link={props.link}/>
             <Movies id={props.id} movies={movies}/>
 
         </div>);
