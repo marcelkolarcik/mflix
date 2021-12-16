@@ -18,10 +18,8 @@ export default function MovieCard(props) {
                         <span className={'text-warning'}>&#9733;</span> {movie.imdb.rating}/10
                         ({movie.imdb.votes.toLocaleString()} votes)
                     </p>
-                    <p className="small text-light  ">
-                        {movie.plot ? movie.plot.substring(0, 100) + '...' : ''}
-                    </p>
-                    <Link className={'btn btn-sm w-100 p-0 m-0'} to={`/movie/${movie.id}`}>link</Link>
+
+
                     <p className="small text-light mb-2">
                         RUNTIME: {movie.runtime} mins
                     </p>
