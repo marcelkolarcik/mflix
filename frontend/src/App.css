@@ -80,37 +80,41 @@ a.dropdown-toggle.nav-link:hover {
     min-height: 100vh;
     height: 100%;
 }
-.x-small{
+
+.x-small {
     font-size: 0.8rem;
 }
-.dark_bg{
-    background-color: #0e1117!important;
+
+.dark_bg {
+    background-color: #0e1117 !important;
 }
-.lighter_bg{
-        background-color:  #1c242c!important;
+
+.lighter_bg {
+    background-color: #1c242c !important;
 
 }
 
-.linda_bg{
-    /*background-color: #ff0c37;*/
+.linda_bg {
     color: #222d34;
-   background: linear-gradient(
+    background: linear-gradient(
             120deg,
             rgba(255, 1, 1, 0.89),
-            rgba(255, 0, 255, 0.77) ,
+            rgba(255, 0, 255, 0.77),
             rgba(8, 255, 255, 0.89),
             #19ff00);
 }
-.marcel_bg{
+
+.marcel_bg {
     /*background-color: #ff0c37;*/
     color: #222d34;
-   background: linear-gradient(
+    background: linear-gradient(
             120deg,
             rgba(199, 18, 32, 0.98),
             rgba(29, 48, 170, 0.77),
             rgba(239, 217, 14, 0.89),
             #ee0d4c);
 }
+
 .movie_card, .search_card {
     background-position: center center;
     background-size: cover;
