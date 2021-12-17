@@ -25,9 +25,9 @@ export default function Search() {
 
         <>
             <Hero title={<SearchTitle searchTerm={search.field +' : '+search.term}/>}/>
-            <div className="main-bg pb-5">
+            <div className="main-bg pb-5" >
 
-                <SearchResults movies={movies}/>
+                <SearchResults movies={movies} />
 
 
             </div>

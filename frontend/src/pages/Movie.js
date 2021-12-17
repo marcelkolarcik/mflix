@@ -49,16 +49,16 @@ export default function Movie() {
 
                 <Hero title={<MovieTitle movie={movie}/>} image={movie.poster}/>
                 <div className="main-bg ">
-                    <div className="container pt-5">
-                        <div className="card  mb-3 dark_bg text-muted p-4">
+                    <div className="container pt-5 ">
+                        <div className="card  mb-3 dark_bg text-muted p-4 mt-5 mt-md-0" >
                             <div className="row g-0">
-                                <div className="col-md-2">
+                                <div className="col-md-2 text-center">
                                     <img src={movie.poster || defaultImg}
                                          className="img-fluid rounded-start" alt={movie.title}/>
                                 </div>
                                 <div className="col-md-10">
-                                    <div className="card-body p-0 m-0 px-4">
-                                        <h3 className="card-title text-light pt-0 mt-0">
+                                    <div className="card-body p-0 m-0 px-0 px-md-4">
+                                        <h3 className="card-title text-light pt-0 mt-5 mt-md-0">
                                             {movie.title} (<NavLink
                                             className={'text-info'}
                                             to={`/search/year/${movie.year}`}>

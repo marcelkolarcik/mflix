@@ -14,6 +14,7 @@ export default function SearchResults(props) {
     const perPage = 24
 
     useEffect(() => {
+        /*slicing movies to show only movies per that page*/
         setMoviesPerPage(movies.slice((page * perPage), (page + 1) * perPage))
         window.scrollTo(0, 0);
 
@@ -25,7 +26,7 @@ export default function SearchResults(props) {
 
 
     return (
-        <div className={'container'}>
+        <div className={'container'} >
 
             <h4 className={'text-light ps-2'}>Page {page + 1}</h4>
             <div className="row row-cols-2 row-cols-md-4 row-cols-lg-6 g-2 ">
