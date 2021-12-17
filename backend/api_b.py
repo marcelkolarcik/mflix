@@ -129,7 +129,7 @@ def search(field, search_term):
             {"$addFields": {'id': {"$toString": "$_id"}}},
             {"$project": {"_id": 0}},
             _sort,
-            {"$limit": 20},
+            {"$limit": 500},
         ]))
 
         if search_term == 'on-the-air':

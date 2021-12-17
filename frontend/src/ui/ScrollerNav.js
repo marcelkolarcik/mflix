@@ -27,7 +27,6 @@ export default function ScrollerNav(props) {
              ref={scrollRightBtn}
              data-parent_id={props.parent_id}
              onClick={scrollRight}
-             id={'test'}
              className={'display-6 pe-3 fw-bold pointer scroller_btn text-muted'
              }>
                         &lsaquo;
@@ -36,7 +35,7 @@ export default function ScrollerNav(props) {
                 ref={scrollLeftBtn}
                 data-parent_id={props.parent_id}
                 onClick={scrollLeft}
-                className={'display-6 fw-bold pointer scroller_btn1'}>
+                className={'display-6 fw-bold pointer scroller_btn'}>
                         &rsaquo;
                     </span>
         </>

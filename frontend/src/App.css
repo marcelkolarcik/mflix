@@ -145,10 +145,29 @@ a.dropdown-toggle.nav-link:hover {
     border-radius: 5px;
 }
 
+/*pagination buttons*/
+.page-link:hover {
+    font-weight: bold;
+    color: #0e1117 !important;
+}
+
+.page-item.active > .page-link {
+
+    background-color: #0e1117 !important;
+    border: 1px solid #0dcaf0 !important;
+    color: #0dcaf0 !important;
+    margin: 0 6px 0 6px !important;
+}
+
 @media screen and (max-width: 768px) {
     .movie_card, .search_card {
         height: 200px;
     }
+}
+
+.scroller_btn:hover {
+    color: #0dcaf0;
+
 }
 
 .scroller-wrapper {

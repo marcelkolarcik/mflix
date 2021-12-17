@@ -19,11 +19,11 @@ export default function Landing(props) {
 
                 <MovieScroller id={'on_the_air'} title={'On the air'} link={'/search/movie/on-the-air'} movies={movies}/>
 
-                 <MovieScroller id={'popular'} title={'TV Popular'} link={'/search/series/popular'} movies={groupedMovies['sp']}/>
+                 <MovieScroller id={'tv_popular'} title={'TV Popular'} link={'/search/series/popular'} movies={groupedMovies['sp']}/>
 
-                <MovieScroller id={'top_rated'} title={'TV Top rated'} link={'/search/series/top-rated'} movies={groupedMovies['st']}/>
+                <MovieScroller id={'tv_top_rated'} title={'TV Top rated'} link={'/search/series/top-rated'} movies={groupedMovies['st']}/>
 
-                <MovieScroller id={'on_the_air'} title={'TV On the air'} link={'/search/series/on-the-air'} movies={movies}/>
+                <MovieScroller id={'tv_on_the_air'} title={'TV On the air'} link={'/search/series/on-the-air'} movies={movies}/>
 
             </div>
         </>);

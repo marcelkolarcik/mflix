@@ -35,7 +35,7 @@ export default function Movie() {
                 <Hero title={<h1>Movie:
                     <Placeholder sm={4} as={Card.Img} src={defaultImg} animation={'wave'}/>
                     <Placeholder as={Card.Title} animation="wave">
-                        <Placeholder xs={6}/>
+                        <Placeholder xs={12}/>
                     </Placeholder>
                 </h1>}/>
                 <div className="main-bg ">
