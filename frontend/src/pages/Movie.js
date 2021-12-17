@@ -4,7 +4,7 @@ import Hero from "../components/Hero";
 import Placeholder from "react-bootstrap/Placeholder";
 import Card from "react-bootstrap/Card";
 import MovieTitle from "../components/HeroTitles/MovieTitle";
-import defaultImg from "../ui/images/PlaceholderImage.svg";
+import defaultImg from "../ui/images/default_hero.jpg";
 import RatingStars from "../ui/RatingStars";
 import SearchLink from "../ui/SearchLink";
 
@@ -25,7 +25,7 @@ export default function Movie() {
             .then(data => {
                 setMovie(data.movie)
                 setComments(data.comments)
-                console.log(data.movie)
+
                 setIsLoading(false)
             })
     }, [param.movieId])
@@ -33,6 +33,7 @@ export default function Movie() {
         return (
             <>
                 <Hero title={<h1>Movie:
+                    <Placeholder sm={4} as={Card.Img} src={defaultImg} animation={'wave'}/>
                     <Placeholder as={Card.Title} animation="wave">
                         <Placeholder xs={6}/>
                     </Placeholder>
@@ -99,10 +100,10 @@ export default function Movie() {
                                             <>
                                                 <p className={'lighter_bg small m-0 px-1 py-1 text-light'}>
                                                     Production: <NavLink
-                                                        className={'text-info'}
-                                                        to={`/search/production/${movie.tomatoes.production}`}>
-                                                        {movie.tomatoes.production}
-                                                    </NavLink>
+                                                    className={'text-info'}
+                                                    to={`/search/production/${movie.tomatoes.production}`}>
+                                                    {movie.tomatoes.production}
+                                                </NavLink>
                                                     <a className={'float-end pe-1 text-muted text-decoration-none'}
                                                        rel="noreferrer"
                                                        target={'_blank'} href={movie.tomatoes.website}>website</a>

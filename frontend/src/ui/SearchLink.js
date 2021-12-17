@@ -3,7 +3,7 @@ import React from "react";
 
 export default function SearchLink(props) {
     const field = props.field;
-    const array = props.array;
+    const array = props.array ? props.array : [];
 
     return (
         <>

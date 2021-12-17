@@ -9,6 +9,7 @@ import Movie from "./pages/Movie";
 function App() {
 
     const [movies, setMovies] = useState([]);
+    const [groupedMovies, setGroupedMovies] = useState([]);
     const [genres, setGenres] = useState([])
     useEffect(() => {
         fetch('/api/')
@@ -20,6 +21,8 @@ function App() {
             .then(data => {
                 setGenres(data.genres)
                 setMovies(data.movies)
+                setGroupedMovies(data.all_grouped)
+
 
 
             })
@@ -30,7 +33,7 @@ function App() {
         <Layout genres={genres}>
 
             <Routes>
-                <Route path={'/'} element={<Landing movies={movies}/>}/>
+                <Route path={'/'} element={<Landing movies={movies} groupedMovies={groupedMovies}/>}/>
                 <Route path={`/search/:field/:term`} element={<Search/>}/>
                 <Route path={`/movie/:movieId`} element={<Movie/>}/>
             </Routes>
