@@ -3,6 +3,7 @@ from pprint import pprint
 from random import shuffle
 from traceback import format_exc
 
+import pymongo
 from bson import ObjectId
 from flask import Blueprint, jsonify, request
 
@@ -14,25 +15,33 @@ api_bp = Blueprint('api_bp', __name__)
 @api_bp.route('')
 def index():
     try:
-        movies = list(mongo.db.movies.aggregate([
-            {
-                "$match": {'poster': {"$exists": True}}
-            },
+        # ind = mongo.db.movies.create_index([
+        # ('imdb.rating',pymongo.DESCENDING)],
+        # name='imdb')
+        # ind2 = mongo.db.movies.create_index([('imdb.votes', pymongo.DESCENDING)],
+        #                                    name='imdb2')
+        # pprint(ind.ind2)
+        # movies = list(mongo.db.movies.aggregate([
+        #     {
+        #         "$match": {'poster': {"$exists": True}}
+        #     },
+        #
+        #     {
+        #         "$addFields": {'id': {"$toString": "$_id"}}
+        #     },
+        #     {"$project": {
+        #         "_id": 0
+        #     }},
+        #
+        #     {
+        #         "$sort": {"imdb.rating": 1}
+        #     },
+        #     {"$limit": 1},
+        # ]))
+        # pprint(movies)
 
-            {
-                "$addFields": {'id': {"$toString": "$_id"}}
-            },
-            {"$project": {
-                "_id": 0
-            }},
-
-            {
-                "$sort": {"imdb.votes": 1}
-            },
-            {"$limit": 10},
-        ]))
         genres = list(mongo.db.movies.distinct('genres'))
-        #grouped = list(mongo.db.movies.find({"poster": {"$exists": True}, "imdb": {"$exists": True}}))
+
 
         # _movies = []
         # _series = []
@@ -59,9 +68,9 @@ def index():
         #     'sa': _series[:10],
         # }
 
-        x = mongo.db.grouped.find_one({},{'_id':0})
-        pprint(x)
-        return jsonify(movies=movies, genres=genres, all_grouped=x)
+        all_grouped = mongo.db.grouped.find_one({},{'_id':0})
+
+        return jsonify( genres=genres, all_grouped=all_grouped)
     except:
         pprint(format_exc())
         return jsonify(movies=[])
@@ -89,8 +98,8 @@ def search(field, search_term):
             'cast': {"$match": {**with_poster, **{"cast": {"$in": [search_term]}}}},
             'directors': {"$match": {**with_poster, **{"directors": {"$in": [search_term]}}}},
             'writers': {"$match": {**with_poster, **{"writers": {"$in": [search_term]}}}},
-            'series': {"$match": {**with_poster, **{"type": "series"}}},
-            'movie': {"$match": {**with_poster, **{"type": "movie"}}},
+            'series': {"$match": {**with_poster, **{"type": "series","imdb.votes":{"$gt":10000},"imdb.rating":{"$gt":6}}}},
+            'movie': {"$match": {**with_poster, **{"type": "movie","imdb.votes":{"$gt":100000},"imdb.rating":{"$gt":8}}}},
             'year': {"$match": {**with_poster, **{"year": int(search_term[:4]) if field == 'year' else search_term}}},
             'production': {"$match": {**with_poster, **{"tomatoes.production": search_term}}},
             'term': {"$match": {"$or":
@@ -106,15 +115,14 @@ def search(field, search_term):
         try:
             # sorting movies, series by popularity or top-rated
             _sort = {
-                'popular': {"$sort": {"imdb.votes": -1}},
-                'top-rated': {"$sort": {"imdb.rating": -1}}
+                'popular': {"$sort": {"imdb.votes": 1}},
+                'top-rated': {"$sort": {"imdb.rating": 1}}
             }[search_term]
         except:
             # default sort
-            _sort = {"$sort": {"imdb.votes": -1}}
+            _sort = {"$sort": {"imdb.votes": 1}}
 
-        if request.values and 'page' in request.values:
-            page = request.values['page']
+
         # types : movie,series /string
         # genres /array
         # cast /array
@@ -124,18 +132,24 @@ def search(field, search_term):
         # tomatoes.production /string
         # year /int
 
+
+
         movies = list(mongo.db.movies.aggregate([
             match_query[field],
             {"$addFields": {'id': {"$toString": "$_id"}}},
             {"$project": {"_id": 0}},
+            {"$sort":{"_id":1}},
             _sort,
             {"$limit": 500},
-        ]))
+
+        ]
+
+        ))
 
         if search_term == 'on-the-air':
             shuffle(movies)
 
-        return jsonify(movies=movies)
+        return jsonify(movies=movies[::-1])
     except:
         pprint(format_exc())
         return jsonify(movies=[])
