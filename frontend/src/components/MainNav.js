@@ -8,8 +8,11 @@ import FormControl from "react-bootstrap/FormControl";
 import React, {useRef} from "react";
 import {NavLink, useNavigate} from 'react-router-dom';
 import DropdownLink from "../ui/DropdownLink";
+import {useAuthState} from "react-firebase-hooks/auth";
+import {auth} from '../auth/firebase';
 
 export default function MainNav(props) {
+    const [user] = useAuthState(auth);
     const genres = props.genres;
 
     const movieLinks = ['popular', 'top-rated', 'on-the-air'];
@@ -17,22 +20,23 @@ export default function MainNav(props) {
     const tvLinks = ['popular', 'top-rated', 'on-the-air'];
     const _search = useRef();
     const navigate = useNavigate();
+
     function onSearch() {
         const searchTerm = _search.current.value
-        if(searchTerm){
-            navigate('/search/term/'+searchTerm)
+        if (searchTerm) {
+            navigate('/search/term/' + searchTerm)
             _search.current.value = ''
-        }
-        else{
+        } else {
             alert('Search term is missing')
         }
         console.log(_search.current.value)
     }
-    function onSubmit(e)
-    {
+
+    function onSubmit(e) {
         e.preventDefault();
         onSearch();
     }
+
     return (
         <Navbar expand={'md'} bg="dark" variant="dark" sticky={'top'}>
             <Container>
@@ -61,7 +65,6 @@ export default function MainNav(props) {
                             ))}
 
 
-
                         </NavDropdown>
                         <NavDropdown title="TV Shows&nbsp;" id="navbarScrollingDropdown"
                                      className={'col-md-5 col-5'}>
@@ -86,7 +89,8 @@ export default function MainNav(props) {
                             <div className="row dropdown-bg g-0">
                                 {genres.map((genre, idx) => (
                                     <div key={idx} className="col-4">
-                                        <DropdownLink class={'dropdown-item nav-link'} field={'genres'} searchTerm={genre} text={genre}/>
+                                        <DropdownLink class={'dropdown-item nav-link'} field={'genres'}
+                                                      searchTerm={genre} text={genre}/>
 
 
                                     </div>
@@ -113,8 +117,25 @@ export default function MainNav(props) {
                                 Search
                             </Form.Label>
                         </Form>
-                        <a className={'btn btn-outline-info mx-2 nav_link_color small mb-2 mb-sm-0'}>Sign-in</a>
-                        <a className={'btn btn-info mx-2 text-light  register_btn'}>Register</a>
+
+                        {user ?
+                            <NavLink
+                                    className='login_btn btn btn-outline-info mx-2  small mb-2 mb-sm-0'
+                                    to={'/dashboard'}>
+                                    Dashboard
+                                </NavLink>
+                            :
+                            <>
+                                <NavLink
+                                    className='login_btn btn btn-outline-info mx-2 nav_link_color small mb-2 mb-sm-0'
+                                    to={'/login'}>
+                                    Sign In
+                                </NavLink>
+                                <NavLink className='btn btn-info mx-2 text-light  register_btn'
+                                         to={'/register'}>Register</NavLink>
+                            </>}
+
+
                     </Nav>
 
                 </Navbar.Collapse>

@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from "react";
-import MovieCard from "../ui/MovieCard";
+import MovieCard from "./movies/MovieCard";
 import SinglePlaceholderCard from "../ui/SinglePlaceholderCard";
 import {useLocation} from "react-router-dom";
 import SearchPagination from "../ui/SearchPagination";

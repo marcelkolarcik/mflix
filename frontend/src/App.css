@@ -9,7 +9,13 @@ input.form-control, span.input-group-text {
     background-color: #313636 !important;
     color: #adb5bd !important;
 }
-
+input.form-control.auth{
+    background-color: transparent!important;
+    border-bottom: 1px solid #6f7d7d !important;
+}
+input.form-control.auth:focus{
+    border-bottom: 2px solid #6f7d7d !important;
+}
 .nav_link_color {
     color: #adb5bd !important;
     font-size: 0.85rem !important;
@@ -20,8 +26,9 @@ input.form-control, span.input-group-text {
     color: whitesmoke !important;
 }
 
-.register_btn {
+.register_btn, .login_btn {
     font-size: 0.85rem !important;
+    white-space: nowrap;
 }
 
 .register_btn:hover {

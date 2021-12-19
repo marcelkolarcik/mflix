@@ -1,12 +1,15 @@
+import os
+
 from flask import Flask, send_from_directory
 
+import backend.api_b as api_m
+import backend.user_b as user_m
 from settings import mongo, MONGO_URI
 
 app = Flask(__name__, static_folder='frontend/build', static_url_path='')
-
-import backend.api_b as api_m
-
+app.config['SECRET_KEY'] = os.getenv('SECRET_KEY')
 app.register_blueprint(api_m.api_bp, url_prefix='/api/')
+app.register_blueprint(user_m.user_bp, url_prefix='/api/user/')
 
 mongo.init_app(app, uri=MONGO_URI)
 

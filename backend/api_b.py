@@ -1,11 +1,10 @@
-from collections import defaultdict
+from datetime import datetime
 from pprint import pprint
 from random import shuffle
 from traceback import format_exc
 
-import pymongo
 from bson import ObjectId
-from flask import Blueprint, jsonify, request
+from flask import Blueprint, jsonify, request, session
 
 from settings import mongo
 
@@ -42,7 +41,6 @@ def index():
 
         genres = list(mongo.db.movies.distinct('genres'))
 
-
         # _movies = []
         # _series = []
         # for _movie in grouped:
@@ -68,9 +66,9 @@ def index():
         #     'sa': _series[:10],
         # }
 
-        all_grouped = mongo.db.grouped.find_one({},{'_id':0})
+        all_grouped = mongo.db.grouped.find_one({}, {'_id': 0})
 
-        return jsonify( genres=genres, all_grouped=all_grouped)
+        return jsonify(genres=genres, all_grouped=all_grouped)
     except:
         pprint(format_exc())
         return jsonify(movies=[])
@@ -83,7 +81,7 @@ def movie(movie_id):
         comments = list(mongo.db.comments.find({'movie_id': ObjectId(movie_id)}, {'_id': 0, 'movie_id': 0}))
         _movie['id'] = movie_id
 
-        return jsonify(movie=_movie, comments=comments)
+        return jsonify(movie=_movie, comments=comments[::-1])
     except:
         pprint(format_exc())
         return jsonify(movie={}, comments=[])
@@ -98,8 +96,10 @@ def search(field, search_term):
             'cast': {"$match": {**with_poster, **{"cast": {"$in": [search_term]}}}},
             'directors': {"$match": {**with_poster, **{"directors": {"$in": [search_term]}}}},
             'writers': {"$match": {**with_poster, **{"writers": {"$in": [search_term]}}}},
-            'series': {"$match": {**with_poster, **{"type": "series","imdb.votes":{"$gt":10000},"imdb.rating":{"$gt":6}}}},
-            'movie': {"$match": {**with_poster, **{"type": "movie","imdb.votes":{"$gt":100000},"imdb.rating":{"$gt":8}}}},
+            'series': {"$match": {**with_poster,
+                                  **{"type": "series", "imdb.votes": {"$gt": 10000}, "imdb.rating": {"$gt": 6}}}},
+            'movie': {"$match": {**with_poster,
+                                 **{"type": "movie", "imdb.votes": {"$gt": 100000}, "imdb.rating": {"$gt": 8}}}},
             'year': {"$match": {**with_poster, **{"year": int(search_term[:4]) if field == 'year' else search_term}}},
             'production': {"$match": {**with_poster, **{"tomatoes.production": search_term}}},
             'term': {"$match": {"$or":
@@ -122,7 +122,6 @@ def search(field, search_term):
             # default sort
             _sort = {"$sort": {"imdb.votes": 1}}
 
-
         # types : movie,series /string
         # genres /array
         # cast /array
@@ -132,13 +131,11 @@ def search(field, search_term):
         # tomatoes.production /string
         # year /int
 
-
-
         movies = list(mongo.db.movies.aggregate([
             match_query[field],
             {"$addFields": {'id': {"$toString": "$_id"}}},
             {"$project": {"_id": 0}},
-            {"$sort":{"_id":1}},
+            {"$sort": {"_id": 1}},
             _sort,
             {"$limit": 500},
 
@@ -153,3 +150,31 @@ def search(field, search_term):
     except:
         pprint(format_exc())
         return jsonify(movies=[])
+
+
+@api_bp.route('comment/add/', methods=['POST'])
+def add_comment():
+    try:
+        form_data = request.get_json()
+
+        if form_data['comment'] == '':
+            return jsonify(result='error', message='empty comment')
+
+        comment_data = {
+            'name': session.get('user_name'),
+            'email': session.get('user_email'),
+            'text': form_data['comment'][:500],
+            'movie_id': ObjectId(form_data['movieId']),
+            'date': datetime.utcnow()
+        }
+
+        mongo.db.comments.insert_one(comment_data)
+
+        comment_data['movie_id'] = str(comment_data['movie_id'])
+        comment_data['_id'] = str(comment_data['_id'])
+        comment_data['date'] = str(comment_data['date'])
+        pprint(comment_data)
+        return jsonify(result='success', comment=comment_data)
+    except:
+        pprint(format_exc())
+        return jsonify(result='error')

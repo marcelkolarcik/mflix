@@ -1,5 +1,5 @@
 import React from "react";
-import RatingStars from "../../ui/RatingStars";
+import RatingStars from "../movies/RatingStars";
 
 export default function MovieTitle(props) {
     const movie = props.movie

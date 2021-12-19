@@ -5,15 +5,24 @@ import Placeholder from "react-bootstrap/Placeholder";
 import Card from "react-bootstrap/Card";
 import MovieTitle from "../components/HeroTitles/MovieTitle";
 import defaultImg from "../ui/images/default_hero.jpg";
-import RatingStars from "../ui/RatingStars";
+import RatingStars from "../components/movies/RatingStars";
 import SearchLink from "../ui/SearchLink";
+import {useAuthState} from "react-firebase-hooks/auth";
+import {auth} from "../auth/firebase";
+import CommentForm from "../components/CommentForm";
+import Comment from "../components/Comment";
 
 
 export default function Movie() {
+
+
+    const [user] = useAuthState(auth);
     const param = useParams()
     const [movie, setMovie] = useState({})
     const [comments, setComments] = useState([])
     const [isLoading, setIsLoading] = useState(true)
+
+
     useEffect(() => {
         setIsLoading(true)
         fetch('/api/movie/' + param.movieId)
@@ -29,6 +38,8 @@ export default function Movie() {
                 setIsLoading(false)
             })
     }, [param.movieId])
+
+
     if (isLoading) {
         return (
             <>
@@ -50,7 +61,7 @@ export default function Movie() {
                 <Hero title={<MovieTitle movie={movie}/>} image={movie.poster}/>
                 <div className="main-bg ">
                     <div className="container pt-5 ">
-                        <div className="card  mb-3 dark_bg text-muted p-4 mt-5 mt-md-0" >
+                        <div className="card  mb-3 dark_bg text-muted p-4 mt-5 mt-md-0">
                             <div className="row g-0">
                                 <div className="col-md-2 text-center">
                                     <img src={movie.poster || defaultImg}
@@ -119,14 +130,25 @@ export default function Movie() {
                                 </div>
                             </div>
                         </div>
-                        <div className="card dark_bg mt-5 p-4">
+                        <div className="card dark_bg mt-5 p-4 ">
                             <h4 className={'text-light'}>Comments ({comments.length})</h4>
-                            {comments.map((comment, idx) => (
-                                <div key={idx} className={'border-bottom border-secondary mb-3'}>
-                                    <p className="small text-muted p-0 m-0">{comment.name} - {comment.date.split('T')[0]}</p>
-                                    <p className={'fst-italic text-light'}>{comment.text}</p>
-                                </div>
-                            ))}
+
+                            {user && <CommentForm movie_id={movie.id} addComment={setComments}/>}
+                            {!user && <NavLink
+                                to={'/login/?next=/movie/' + movie.id}
+
+                                className='login_btn  btn  text-info mb-3 small mb-2 mb-sm-0'
+                            >
+                                Sign in to add a comment
+                            </NavLink>}
+
+                            <div className="comments">
+                                {comments.map((comment, idx) => (
+                                    <Comment key={idx} comment={comment}/>
+                                ))}
+                            </div>
+
+
                         </div>
                     </div>
 

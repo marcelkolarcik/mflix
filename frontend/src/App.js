@@ -5,7 +5,10 @@ import {Route, Routes} from 'react-router-dom';
 import Landing from "./pages/Landing";
 import Search from "./pages/Search";
 import Movie from "./pages/Movie";
-
+import Login from "./auth/Login";
+import Reset from "./auth/Reset";
+import Register from "./auth/Register";
+import Dashboard from "./auth/Dashboard";
 function App() {
 
     const [movies, setMovies] = useState([]);
@@ -24,7 +27,6 @@ function App() {
                 setGroupedMovies(data.all_grouped)
 
 
-
             })
     }, [])
 
@@ -36,6 +38,10 @@ function App() {
                 <Route path={'/'} element={<Landing movies={movies} groupedMovies={groupedMovies}/>}/>
                 <Route path={`/search/:field/:term`} element={<Search/>}/>
                 <Route path={`/movie/:movieId`} element={<Movie/>}/>
+                <Route path="/login" element={<Login/>}/>
+                <Route path="/register" element={<Register/>}/>
+                <Route path="/reset" element={<Reset/>}/>
+                <Route path="/dashboard" element={<Dashboard/>}/>
             </Routes>
 
 
