@@ -2,7 +2,7 @@ import React, {useEffect, useState} from "react";
 import {useParams} from "react-router-dom";
 import Hero from "../components/Hero";
 import SearchTitle from "../components/HeroTitles/SearchTitle";
-import SearchResults from "../components/SearchResults";
+import SearchResults from "../components/movies/SearchResults";
 
 export default function Search() {
 

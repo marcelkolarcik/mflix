@@ -6,7 +6,7 @@ import Form from "react-bootstrap/Form";
 import InputGroup from "react-bootstrap/InputGroup";
 import FormControl from "react-bootstrap/FormControl";
 import React, {useRef} from "react";
-import {NavLink, useNavigate} from 'react-router-dom';
+import {NavLink, useNavigate, Link} from 'react-router-dom';
 import DropdownLink from "../ui/DropdownLink";
 import {useAuthState} from "react-firebase-hooks/auth";
 import {auth} from '../auth/firebase';
@@ -39,23 +39,31 @@ export default function MainNav(props) {
 
     return (
         <Navbar expand={'md'} bg="dark" variant="dark" sticky={'top'}>
-            <Container>
+            <>
                 <NavLink
-                    className={'navbar navbar-brand'}
+                    className={'navbar navbar-brand px-2'}
                     to={`/`}>
                     mkFLIX
                 </NavLink>
                 <Navbar.Toggle aria-controls="responsive-navbar-nav"/>
                 <Navbar.Collapse id="responsive-navbar-nav">
+                    <Link
+
+
+                            className={' text-decoration-none nav_link_color'}
+                            to={`/theaters`}>
+                            Theaters
+                        </Link>
                     <Nav className="me-auto">
                         {/*<Link className='mx-3 nav-link text-light ' to={'/'}>Places to stay</Link>*/}
+
 
                         <NavDropdown title="Movies&nbsp;" id="navbarScrollingDropdown">
                             {movieLinks.map((sort, idx) => (
                                 <div key={idx} className="col">
                                     <NavLink
 
-                                        onClick={() => document.querySelector('div.dropdown-menu').classList.remove('show')}
+                                        onClick={() => document.querySelector('.show').classList.remove('show')}
                                         className={'dropdown-item nav-link'}
                                         to={`/search/movie/${sort}`}>
                                         {sort}
@@ -101,6 +109,7 @@ export default function MainNav(props) {
 
 
                         </NavDropdown>
+
                     </Nav>
 
                     <Nav className="ms-auto">
@@ -120,10 +129,10 @@ export default function MainNav(props) {
 
                         {user ?
                             <NavLink
-                                    className='login_btn btn btn-outline-info mx-2  small mb-2 mb-sm-0'
-                                    to={'/dashboard'}>
-                                    Dashboard
-                                </NavLink>
+                                className='login_btn btn btn-outline-info mx-2  small mb-2 mb-sm-0'
+                                to={'/dashboard'}>
+                                Dashboard
+                            </NavLink>
                             :
                             <>
                                 <NavLink
@@ -139,7 +148,7 @@ export default function MainNav(props) {
                     </Nav>
 
                 </Navbar.Collapse>
-            </Container>
+            </>
 
         </Navbar>
     );

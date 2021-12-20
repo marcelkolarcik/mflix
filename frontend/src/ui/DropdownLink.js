@@ -3,7 +3,7 @@ import React from "react";
 
 export default function DropdownLink(props) {
     function closeDrop() {
-        document.querySelector('div.dropdown-menu').classList.remove('show')
+        document.querySelector('.show').classList.remove('show')
 
 
     }

@@ -73,8 +73,39 @@ def index():
         pprint(format_exc())
         return jsonify(movies=[])
 
+@api_bp.route('theaters/')
+def theaters():
+    try:
+        _theaters = list(mongo.db.theaters.find({},{'_id':{"$toString":"$_id"},"location":1}))
 
-@api_bp.route('/movie/<movie_id>')
+        return jsonify(theaters=_theaters)
+
+    except:
+        pprint(format_exc())
+        return jsonify(theaters = [])
+
+@api_bp.route('on-the-air/')
+def on_the_air():
+    try:
+        ontheair = list(mongo.db.movies.aggregate([
+
+            {"$addFields": {'id': {"$toString": "$_id"}}},
+            {"$project": {"_id": 0}},
+
+
+            { "$sample": {"size": 12}}
+
+        ]
+
+        ))
+
+        return jsonify(movies=ontheair)
+
+    except:
+        pprint(format_exc())
+        return jsonify(movies = [])
+
+@api_bp.route('movie/<movie_id>')
 def movie(movie_id):
     try:
         _movie = mongo.db.movies.find_one({'_id': ObjectId(movie_id)}, {'_id': 0})

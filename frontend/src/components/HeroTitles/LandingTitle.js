@@ -3,7 +3,7 @@ import {useAuthState} from "react-firebase-hooks/auth";
 import {auth} from "../../auth/firebase";
 import {Link} from 'react-router-dom';
 
-export default function HeroTitle() {
+export default function LandingTitle() {
     const [user] = useAuthState(auth);
 
 

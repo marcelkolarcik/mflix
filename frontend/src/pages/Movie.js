@@ -9,8 +9,8 @@ import RatingStars from "../components/movies/RatingStars";
 import SearchLink from "../ui/SearchLink";
 import {useAuthState} from "react-firebase-hooks/auth";
 import {auth} from "../auth/firebase";
-import CommentForm from "../components/CommentForm";
-import Comment from "../components/Comment";
+import CommentForm from "../components/comments/CommentForm";
+import Comment from "../components/comments/Comment";
 
 
 export default function Movie() {
