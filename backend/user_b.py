@@ -4,7 +4,8 @@ from flask import Blueprint, request, jsonify, session
 
 from settings import mongo
 
-user_bp = Blueprint('user_bp',__name__)
+user_bp = Blueprint('user_bp', __name__)
+
 
 @user_bp.route('add/', methods=['POST'])
 def add_user():
@@ -20,9 +21,11 @@ def add_user():
 
         return jsonify(response='success')
     except Exception as e:
+        # log error
         pprint(e)
         return jsonify(response='error')
     pass
+
 
 @user_bp.route('get/<user_id>/')
 def get_user(user_id):
@@ -39,5 +42,6 @@ def get_user(user_id):
             pprint('no user')
             return {}
     except Exception as e:
+        # log error
         pprint(e)
         return {}

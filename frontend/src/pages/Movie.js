@@ -34,6 +34,7 @@ export default function Movie() {
             .then(data => {
                 setMovie(data.movie)
                 setComments(data.comments)
+                console.log(data.user_email)
 
                 setIsLoading(false)
             })
@@ -133,7 +134,7 @@ export default function Movie() {
                         <div className="card dark_bg mt-5 p-4 ">
                             <h4 className={'text-light'}>Comments ({comments.length})</h4>
 
-                            {user && <CommentForm movie_id={movie.id} addComment={setComments}/>}
+                            {user && <CommentForm movie_id={movie.id} addComment={setComments} />}
                             {!user && <NavLink
                                 to={'/login/?next=/movie/' + movie.id}
 
@@ -143,8 +144,9 @@ export default function Movie() {
                             </NavLink>}
 
                             <div className="comments">
+                                <p id="new_comment" className={'text-light fst-italic'}/>
                                 {comments.map((comment, idx) => (
-                                    <Comment key={idx} comment={comment}/>
+                                    <Comment key={idx} comment={comment} isOwner={user && comment.email === user.email}/>
                                 ))}
                             </div>
 

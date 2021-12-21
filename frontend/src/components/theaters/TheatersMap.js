@@ -39,7 +39,9 @@ export default function TheatersMap(props) {
                                         key={theater._id}
                                         position={[theater.location.geo.coordinates[1], theater.location.geo.coordinates[0]]}
                                     >
-                                        <TheaterPopup theater={theater} onclick={props.onclick}/>
+                                        <TheaterPopup theater={theater}
+                                                      onclick={props.onclick}
+                                                      setTheaterId={props.setTheaterId}/>
                                     </Marker>
                                 ))
                                 : ''}

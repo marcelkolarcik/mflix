@@ -10,6 +10,7 @@ import Reset from "./auth/Reset";
 import Register from "./auth/Register";
 import Dashboard from "./auth/Dashboard";
 import Theaters from "./pages/Theaters";
+import Theater from "./pages/Theater";
 function App() {
 
     const [movies, setMovies] = useState([]);
@@ -43,6 +44,7 @@ function App() {
                 <Route path="/register" element={<Register/>}/>
                 <Route path="/reset" element={<Reset/>}/>
                  <Route path="/theaters" element={<Theaters/>}/>
+                  <Route path={`/theater/:theaterId`} element={<Theater/>}/>
                 <Route path="/dashboard" element={<Dashboard/>}/>
             </Routes>
 

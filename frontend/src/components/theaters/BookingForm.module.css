@@ -1,0 +1,21 @@
+.time_slot {
+    background-color: #313636;
+    color: whitesmoke;
+}
+.time_slot:hover {
+    background-color: whitesmoke;
+    color:  #313636;
+}
+.add_btn{
+    height: 30px;
+    width: 30px;
+    border-radius: 100% !important;
+    border: 1px solid #1c242c!important;
+    color: #1c242c;
+
+}
+.add_btn:hover{
+    border: 1px solid #0dcaf0!important;
+    transform: scale(1.22);
+
+}

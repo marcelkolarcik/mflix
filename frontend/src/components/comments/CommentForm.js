@@ -1,8 +1,10 @@
 import React, {useRef, useState} from "react";
 
 export default function CommentForm(props) {
-    const commentLength = 500
-    const [remaining, setRemaining] = useState(commentLength)
+    const commentLength = 500;
+    const [remaining, setRemaining] = useState(commentLength);
+    const [isSending, setIsSending] = useState(false);
+    const [isSent, setIsSent] = useState(false);
     const comment = useRef();
 
     function onSubmitHandler(e) {
@@ -12,7 +14,7 @@ export default function CommentForm(props) {
             alert('Empty comment');
             return;
         }
-        fetch('/api/comment/add/',
+        fetch('/api/comments/add/',
             {
                 method: 'POST',
                 body: JSON.stringify({
@@ -30,8 +32,10 @@ export default function CommentForm(props) {
             })
             .then(data => {
                     if (data.result === 'success') {
-
+                        document.getElementById('new_comment').append(comment.current.value);
                         comment.current.value = ''
+                        setIsSending(false);
+                        setIsSent(true);
 
 
                     } else if (data.result === 'error') {
@@ -46,8 +50,10 @@ export default function CommentForm(props) {
 
     return (
         <div>
-            <p className="lead text-light">Add your comment <small className={'small'}>({remaining})</small></p>
-            <form action="" onSubmit={onSubmitHandler}>
+            {!isSent ?
+                <>
+                    <p className="lead text-light">Add your comment <small className={'small'}>({remaining})</small></p>
+                    <form action="" onSubmit={onSubmitHandler}>
                 <textarea name="comment"
                           id="comment"
                           ref={comment}
@@ -56,8 +62,16 @@ export default function CommentForm(props) {
                           className={'form-control mb-3'}
                           onChange={(e) => setRemaining(commentLength - e.target.value.length)}
                 />
-                <button className={'btn btn-outline-info float-end btn-sm'}>Submit</button>
-            </form>
+                        <button
+                            onClick={() => setIsSending(true)}
+                            className={'btn btn-outline-info float-end btn-sm'}>
+                            {isSending ? 'Sending...' : 'Submit'}
+                        </button>
+                    </form>
+                </>
+                :
+                <p className={'text-light'}>Thank you for your comment!</p>}
+
         </div>
     );
 }

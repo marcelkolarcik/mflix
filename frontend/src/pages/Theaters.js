@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from "react";
 import TheatersMap from "../components/theaters/TheatersMap";
 import MovieScroller from "../components/movies/MovieScroller";
+import {Link} from 'react-router-dom'
 
 
 export default function Theaters(props) {
@@ -8,6 +9,10 @@ export default function Theaters(props) {
     const [markers, setMarkers] = useState([]);
     const [isClicked, setIsClicked] = useState(false)
     const [onTheAir, setOnTheAir] = useState([])
+    const [theaterId, setTheaterId] = useState('')
+    const [theaterMovies, setTheaterMovies] = useState('')
+    let tempMovies = ''
+
 
     function showOnTheAir() {
         setIsClicked(true)
@@ -20,6 +25,11 @@ export default function Theaters(props) {
             })
             .then(data => {
                     setOnTheAir(data.movies);
+                    data.movies.map(movie => (
+                        tempMovies += movie.id + ','
+                    ))
+                    setTheaterMovies(tempMovies)
+
                     document.getElementById('on_the_air').scrollIntoView();
                 }
                 ,
@@ -33,7 +43,7 @@ export default function Theaters(props) {
 
     useEffect(() => {
 
-        fetch('/api/theaters/')
+        fetch('/api/theater/all/')
             .then(response => {
                 if (response.status === 200) return response.json()
             }).then(data => {
@@ -58,7 +68,18 @@ export default function Theaters(props) {
                 <TheatersMap
                     markers={markers}
                     onclick={showOnTheAir}
-                    onTheAir={(onTheAir && isClicked) && <MovieScroller movies={onTheAir} title={'Currently showing'} link={'#'} id={'on_the_air'}/>}
+                    setTheaterId={setTheaterId}
+                    onTheAir={(onTheAir && isClicked) &&
+                    <>
+                        <MovieScroller movies={onTheAir}
+                                       title={'Currently showing'}
+                                       link={`/theater/${theaterId}?movies=${theaterMovies}`} id={'on_the_air'}/>
+                        <p className="lead text-light text-center pt-0 mt-0 pb-5">
+                            <Link
+                                to={`/theater/${theaterId}?movies=${theaterMovies}`}
+                                className={'text-decoration-none btn btn-outline-info p-0 px-4 py-1'}>BOOK NOW</Link>
+                        </p>
+                    </>}
                 />
             </>
         );

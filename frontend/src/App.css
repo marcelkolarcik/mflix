@@ -100,7 +100,11 @@ a.dropdown-toggle.nav-link:hover {
     background-color: #1c242c !important;
 
 }
-
+.theater_movie:hover{
+   background-color: #1c242c !important;
+    border: 1px solid #0dcaf0;
+    cursor:pointer;
+}
 .linda_bg {
     color: #222d34;
     background: linear-gradient(
