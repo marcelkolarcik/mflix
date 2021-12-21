@@ -5,7 +5,14 @@ export default function BookingConfirmed(props) {
     const booking = props.booking;
     return (
         <div>
-            <p className={'lead text-center bg-warning p-2 mb-0 fw-bold'}>Booking Confirmed!</p>
+            <div className={' text-center bg-warning p-2 mb-0'}>
+                <p className="lead fw-bold">Booking Confirmed!</p>
+                <p className={'small'}>
+                    Thank you, {booking.bookingName}. <br/>
+                    You would receive a confirmation email to: <br/> {booking.bookingEmail}
+                </p>
+
+            </div>
             <div className={'dark_bg text-light p-2 text-end border border-warning mt-0'}>
                 <TheaterInfo theater={booking.theater}/>
             </div>
@@ -16,7 +23,7 @@ export default function BookingConfirmed(props) {
                 Title: {booking.title} <br/>
                 Adults: {booking.adults} <br/>
                 Children: {booking.children} <br/>
-                Total: {booking.totalPrice} <br/>
+                Total: ${booking.totalPrice} <br/>
                 Day: {booking.day} <br/>
                 Time: {booking.time}
             </p>

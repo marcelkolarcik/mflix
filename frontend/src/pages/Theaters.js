@@ -30,7 +30,8 @@ export default function Theaters(props) {
                     ))
                     setTheaterMovies(tempMovies)
 
-                    document.getElementById('on_the_air').scrollIntoView();
+                    document.querySelector('.scroller_title').scrollIntoView();
+                    document.querySelector('nav.navbar').classList.remove('sticky-top');
                 }
                 ,
                 error => {
@@ -74,10 +75,10 @@ export default function Theaters(props) {
                         <MovieScroller movies={onTheAir}
                                        title={'Currently showing'}
                                        link={`/theater/${theaterId}?movies=${theaterMovies}`} id={'on_the_air'}/>
-                        <p className="lead text-light text-center pt-0 mt-0 pb-5">
+                        <p className=" text-light text-center pt-0 pb-5 " style={{marginTop:'-50px'}}>
                             <Link
                                 to={`/theater/${theaterId}?movies=${theaterMovies}`}
-                                className={'text-decoration-none btn btn-outline-info p-0 px-4 py-1'}>BOOK NOW</Link>
+                                className={'text-decoration-none btn btn-outline-info p-0 px-4 py-1 pt-0 mt-0'}>BOOK NOW</Link>
                         </p>
                     </>}
                 />

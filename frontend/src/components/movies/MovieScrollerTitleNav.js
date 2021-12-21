@@ -7,7 +7,7 @@ export default function MovieScrollerTitleNav(props) {
 
     return (
         <>
-            <h3 className={'bg-transparent text-light ps-3 mb-5 pointer'}>
+            <h3 className={'bg-transparent text-light ps-3 mb-5 pointer scroller_title'}>
                  <NavLink className={'text-light text-decoration-none'}
                             to={props.link}>
                             {props.title}  <span className={'display-6 mt-3'}>&rsaquo;</span>

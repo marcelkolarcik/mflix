@@ -10,7 +10,7 @@ export default function BookingInProcess() {
 
             </p>
             <Placeholder as={Card.Title} animation="glow">
-                <Placeholder xs={12} size={'xc'} bg={'info'}/>
+                <Placeholder xs={12} size={'xc'} bg={'warning'}/>
             </Placeholder>
         </>
     );

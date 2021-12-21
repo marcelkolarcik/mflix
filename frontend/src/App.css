@@ -9,9 +9,10 @@ input.form-control, span.input-group-text {
     background-color: #313636 !important;
     color: #adb5bd !important;
 }
-input.form-control.auth{
+input.form-control.auth, input.form-control.booking{
     background-color: transparent!important;
     border-bottom: 1px solid #6f7d7d !important;
+    color: #1c242c !important;
 }
 input.form-control.auth:focus{
     border-bottom: 2px solid #6f7d7d !important;
