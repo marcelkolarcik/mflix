@@ -49,8 +49,8 @@ export default function MainNav(props) {
                 <Navbar.Collapse id="responsive-navbar-nav">
                     <Link
 
-
-                            className={' text-decoration-none nav_link_color'}
+                            onClick={() => document.querySelector('.show').classList.remove('show')}
+                            className={' text-decoration-none nav_link_color nav-link'}
                             to={`/theaters`}>
                             Theaters
                         </Link>
@@ -64,7 +64,7 @@ export default function MainNav(props) {
                                     <NavLink
 
                                         onClick={() => document.querySelector('.show').classList.remove('show')}
-                                        className={'dropdown-item nav-link'}
+                                        className={'dropdown-item nav-link ps-2'}
                                         to={`/search/movie/${sort}`}>
                                         {sort}
                                     </NavLink>
@@ -80,8 +80,8 @@ export default function MainNav(props) {
                                 <div key={idx} className="col">
                                     <NavLink
 
-                                        onClick={() => document.querySelector('div.dropdown-menu').classList.remove('show')}
-                                        className={'dropdown-item nav-link'}
+                                        onClick={() => document.querySelector('.show').classList.remove('show')}
+                                        className={'dropdown-item nav-link ps-2'}
                                         to={`/search/series/${sort}`}>
                                         {sort}
                                     </NavLink>

@@ -145,6 +145,7 @@ export default function Movie() {
 
                             <div className="comments">
                                 <p id="new_comment" className={'text-light fst-italic'}/>
+
                                 {comments.map((comment, idx) => (
                                     <Comment key={idx} comment={comment} isOwner={user && comment.email === user.email}/>
                                 ))}
