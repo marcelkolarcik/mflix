@@ -75,7 +75,7 @@ export default function Theaters(props) {
                         <MovieScroller movies={onTheAir}
                                        title={'Currently showing'}
                                        link={`/theater/${theaterId}?movies=${theaterMovies}`} id={'on_the_air'}/>
-                        <p className=" text-light text-center pt-0 pb-5 " style={{marginTop:'-50px'}}>
+                        <p className=" text-light text-center " style={{marginTop:'-50px'}}>
                             <Link
                                 to={`/theater/${theaterId}?movies=${theaterMovies}`}
                                 className={'text-decoration-none btn btn-outline-info p-0 px-4 py-1 pt-0 mt-0'}>BOOK NOW</Link>

@@ -1,5 +1,6 @@
 import TheaterInfo from "../TheaterInfo";
 import React from "react";
+import {NavLink} from "react-router-dom";
 
 export default function BookingConfirmed(props) {
     const booking = props.booking;
@@ -9,7 +10,12 @@ export default function BookingConfirmed(props) {
                 <p className="lead fw-bold">Booking Confirmed!</p>
                 <p className={'small'}>
                     Thank you, {booking.bookingName}. <br/>
-                    You would receive a confirmation email to: <br/> {booking.bookingEmail}
+                    You would receive a confirmation email to: <br/> {booking.bookingEmail} <br/>
+                    You can check your booking in the <NavLink
+                    className=''
+                    to={'/dashboard'}>
+                    Dashboard
+                </NavLink>
                 </p>
 
             </div>

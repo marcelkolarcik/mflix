@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useContext, useState} from 'react';
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import classes from './BookingForm.module.css';
@@ -7,9 +7,10 @@ import Times from "./BookingForm/Times";
 import BookingConfirmed from "./BookingForm/BookingConfirmed";
 import BookingInProcess from "./BookingForm/BookingInProcess";
 import FormError, {requiredFields} from "./BookingForm/FormError";
+import BookingContext from "../../store/booking-context";
 
 export default function BookingForm(props) {
-
+    const bookingCtx = useContext(BookingContext);
     const movie = props.movie;
     const [show, setShow] = useState(false);
     const [time, setTime] = useState('')
@@ -39,15 +40,16 @@ export default function BookingForm(props) {
         bookingEmail: bookingEmail
     }
 
+    let _error = false;
 
     function bookNow() {
-        let _error = false;
+
         requiredFields.map(field => {
-            if(!booking[field])
-            {
+            if (!booking[field]) {
                 _error = true;
 
             }
+            return _error
         })
 
         if (_error) {
@@ -55,13 +57,16 @@ export default function BookingForm(props) {
         } else {
             setBookingError(false)
             setIsBooking(true)
+            bookingCtx.addBooking(booking);
+
 
             function setIsBookedHandler() {
                 setIsBooked(true);
                 setIsBooking(false);
+
             }
 
-            setTimeout(setIsBookedHandler, 5000)
+            setTimeout(setIsBookedHandler, 6000)
         }
 
 
@@ -108,7 +113,8 @@ export default function BookingForm(props) {
             <Modal.Body>
                 {(!isBooking && !isBooked) &&
                 <>
-                    <p className={'text-center small fw-bold fst-italic'}>Adults : ({pricePerAdult}$/person), Children (under 12):
+                    <p className={'text-center small fw-bold fst-italic'}>Adults : ({pricePerAdult}$/person), Children
+                        (under 12):
                         ({pricePerChild}$/child)</p>
                     {bookingError && <FormError booking={booking}/>}
 
@@ -167,7 +173,8 @@ export default function BookingForm(props) {
                         </div>
                     </div>
 
-                <p className="x-small text-center fw-bold fst-italic">This is a demo app. You can enter any name or email containing "@".</p>
+                    <p className="x-small text-center fw-bold fst-italic">This is a demo app. You can enter any name or
+                        email containing "@".</p>
                 </>}
                 {isBooking && <BookingInProcess/>}
                 {(isBooked) && <BookingConfirmed booking={booking}/>}

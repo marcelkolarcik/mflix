@@ -1,17 +1,18 @@
 import Navbar from "react-bootstrap/Navbar";
-import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import NavDropdown from "react-bootstrap/NavDropdown";
 import Form from "react-bootstrap/Form";
 import InputGroup from "react-bootstrap/InputGroup";
 import FormControl from "react-bootstrap/FormControl";
 import React, {useRef} from "react";
-import {NavLink, useNavigate, Link} from 'react-router-dom';
-import DropdownLink from "../ui/DropdownLink";
+import {Link, NavLink, useNavigate} from 'react-router-dom';
+import DropdownLink, {closeDrop} from "../ui/DropdownLink";
 import {useAuthState} from "react-firebase-hooks/auth";
 import {auth} from '../auth/firebase';
 
 export default function MainNav(props) {
+
+
     const [user] = useAuthState(auth);
     const genres = props.genres;
 
@@ -26,6 +27,7 @@ export default function MainNav(props) {
         if (searchTerm) {
             navigate('/search/term/' + searchTerm)
             _search.current.value = ''
+            closeDrop();
         } else {
             alert('Search term is missing')
         }
@@ -49,11 +51,11 @@ export default function MainNav(props) {
                 <Navbar.Collapse id="responsive-navbar-nav">
                     <Link
 
-                            onClick={() => document.querySelector('.show').classList.remove('show')}
-                            className={' text-decoration-none nav_link_color nav-link'}
-                            to={`/theaters`}>
-                            Theaters
-                        </Link>
+                        onClick={closeDrop}
+                        className={' text-decoration-none nav_link_color nav-link'}
+                        to={`/theaters`}>
+                        Theaters
+                    </Link>
                     <Nav className="me-auto">
                         {/*<Link className='mx-3 nav-link text-light ' to={'/'}>Places to stay</Link>*/}
 
@@ -63,7 +65,7 @@ export default function MainNav(props) {
                                 <div key={idx} className="col">
                                     <NavLink
 
-                                        onClick={() => document.querySelector('.show').classList.remove('show')}
+                                        onClick={closeDrop}
                                         className={'dropdown-item nav-link ps-2'}
                                         to={`/search/movie/${sort}`}>
                                         {sort}
@@ -80,7 +82,7 @@ export default function MainNav(props) {
                                 <div key={idx} className="col">
                                     <NavLink
 
-                                        onClick={() => document.querySelector('.show').classList.remove('show')}
+                                        onClick={closeDrop}
                                         className={'dropdown-item nav-link ps-2'}
                                         to={`/search/series/${sort}`}>
                                         {sort}
@@ -130,6 +132,7 @@ export default function MainNav(props) {
                         {user ?
                             <NavLink
                                 className='login_btn btn btn-outline-info mx-2  small mb-2 mb-sm-0'
+                                onClick={closeDrop}
                                 to={'/dashboard'}>
                                 Dashboard
                             </NavLink>
@@ -137,11 +140,14 @@ export default function MainNav(props) {
                             <>
                                 <NavLink
                                     className='login_btn btn btn-outline-info mx-2 nav_link_color small mb-2 mb-sm-0'
+                                    onClick={closeDrop}
                                     to={'/login'}>
                                     Sign In
                                 </NavLink>
                                 <NavLink className='btn btn-info mx-2 text-light  register_btn'
-                                         to={'/register'}>Register</NavLink>
+                                         onClick={closeDrop}
+                                         to={'/register'}
+                                >Register</NavLink>
                             </>}
 
 

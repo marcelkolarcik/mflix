@@ -8,9 +8,11 @@ import Movie from "./pages/Movie";
 import Login from "./auth/Login";
 import Reset from "./auth/Reset";
 import Register from "./auth/Register";
-import Dashboard from "./auth/Dashboard";
+import Dashboard from "./pages/Dashboard";
 import Theaters from "./pages/Theaters";
 import Theater from "./pages/Theater";
+import {BookingContextProvider} from "./store/booking-context";
+
 function App() {
 
     const [movies, setMovies] = useState([]);
@@ -34,22 +36,33 @@ function App() {
 
 
     return (
-        <Layout genres={genres}>
+        <BookingContextProvider>
+            <Layout genres={genres}>
 
-            <Routes>
-                <Route path={'/'} element={<Landing movies={movies} groupedMovies={groupedMovies}/>}/>
-                <Route path={`/search/:field/:term`} element={<Search/>}/>
-                <Route path={`/movie/:movieId`} element={<Movie/>}/>
-                <Route path="/login" element={<Login/>}/>
-                <Route path="/register" element={<Register/>}/>
-                <Route path="/reset" element={<Reset/>}/>
-                 <Route path="/theaters" element={<Theaters/>}/>
-                  <Route path={`/theater/:theaterId`} element={<Theater/>}/>
-                <Route path="/dashboard" element={<Dashboard/>}/>
-            </Routes>
+                <Routes>
+                    <Route path={'/'} element={<Landing movies={movies} groupedMovies={groupedMovies}/>}/>
+                    <Route path={`/search/:field/:term`} element={<Search/>}/>
+                    <Route path={`/movie/:movieId`} element={<Movie/>}/>
+                    <Route path="/login" element={<Login/>}/>
+                    <Route path="/register" element={<Register/>}/>
+                    <Route path="/reset" element={<Reset/>}/>
+                    <Route path="/theaters" element={<Theaters/>}/>
+                    <Route path={`/theater/:theaterId`} element={
+
+                        <Theater/>
+
+                    }/>
+                    <Route path="/dashboard"
+                           element={
+
+                               <Dashboard/>
+                           }/>
+
+                </Routes>
 
 
-        </Layout>
+            </Layout>
+        </BookingContextProvider>
     );
 }
 
