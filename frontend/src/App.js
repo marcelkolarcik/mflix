@@ -9,7 +9,7 @@ import Login from "./auth/Login";
 import Reset from "./auth/Reset";
 import Register from "./auth/Register";
 import Dashboard from "./pages/Dashboard";
-import Theaters from "./pages/Theaters";
+import Theatres from "./pages/Theatres";
 import Theater from "./pages/Theater";
 import {BookingContextProvider} from "./store/booking-context";
 
@@ -46,7 +46,7 @@ function App() {
                     <Route path="/login" element={<Login/>}/>
                     <Route path="/register" element={<Register/>}/>
                     <Route path="/reset" element={<Reset/>}/>
-                    <Route path="/theaters" element={<Theaters/>}/>
+                    <Route path="/theatres" element={<Theatres/>}/>
                     <Route path={`/theater/:theaterId`} element={
 
                         <Theater/>

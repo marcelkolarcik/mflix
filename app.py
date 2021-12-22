@@ -2,10 +2,10 @@ import os
 
 from flask import Flask, send_from_directory
 
-import backend.movies_b as movies_m
-import backend.user_b as user_m
-import backend.theater_b as theater_m
 import backend.comments_b as comments_m
+import backend.movies_b as movies_m
+import backend.theater_b as theater_m
+import backend.user_b as user_m
 from settings import mongo, MONGO_URI
 
 app = Flask(__name__, static_folder='frontend/build', static_url_path='')
@@ -20,6 +20,11 @@ mongo.init_app(app, uri=MONGO_URI)
 
 @app.route('/')
 def serve():
+    return send_from_directory(app.static_folder, 'index.html')
+
+
+@app.errorhandler(404)
+def not_found():
     return send_from_directory(app.static_folder, 'index.html')
 
 

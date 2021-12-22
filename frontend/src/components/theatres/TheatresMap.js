@@ -4,7 +4,7 @@ import {MapContainer, Marker, TileLayer} from "react-leaflet";
 import React from "react";
 import TheaterPopup from "./TheaterPopup";
 
-export default function TheatersMap(props) {
+export default function TheatresMap(props) {
 
     const markers = props.markers
 
@@ -19,7 +19,7 @@ export default function TheatersMap(props) {
                             {'Click on the marker to see the theater details'}
                             <br/> Displaying {markers.length} results.</p> :
                         <p className={'text-center lead text-light'}>
-                            {'Loading theaters...'}
+                            {'Loading theatres...'}
                         </p>}
 
                     <div className="col-12 col-lg-9 mx-lg-auto ">

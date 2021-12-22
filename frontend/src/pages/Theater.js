@@ -2,7 +2,7 @@ import React, {useEffect, useState} from "react";
 import {useParams} from "react-router-dom";
 import Hero from "../components/Hero";
 import TheaterTitle from "../components/HeroTitles/TheaterTitle";
-import TheaterMovie from "../components/theaters/TheaterMovie";
+import TheaterMovie from "../components/theatres/TheaterMovie";
 
 export default function Theater() {
     const params = useParams();
@@ -51,7 +51,7 @@ export default function Theater() {
                     </>}/>
 
                 <div className="main-bg ">
-                    <div className="container pt-5 text-light">
+                    <div className="container p-5 text-light">
 
                         {movies.map(movie=>(<TheaterMovie key={movie.id} movie={movie} theater={theater}/>))}
                     </div>

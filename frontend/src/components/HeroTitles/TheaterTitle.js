@@ -1,5 +1,5 @@
 import React from "react";
-import TheaterInfo from "../theaters/TheaterInfo";
+import TheaterInfo from "../theatres/TheaterInfo";
 
 export default function TheaterTitle(props) {
 

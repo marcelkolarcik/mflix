@@ -49,7 +49,7 @@ function Dashboard() {
                     {bookingCtx.numOfBookings > 0 ?
                         <MyBookings bookings={bookingCtx.bookings}/> :
                         <p className="lead text-center">No bookings yet!
-                        <br/> <Link className={'text-decoration-none'} to={'/theaters'}>Visit theaters page</Link> to find theaters near you.</p>}
+                        <br/> <Link className={'text-decoration-none'} to={'/theatres'}>Visit theatres page</Link> to find theatres near you.</p>}
                 </div>
             </div>
         </div>

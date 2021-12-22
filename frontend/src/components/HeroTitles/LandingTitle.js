@@ -10,7 +10,7 @@ export default function LandingTitle() {
     return (
         <>
             <h1 className={'fw-light'}>Find Movies & TV Shows. <br/>
-            Explore Theaters Near You. <br/>
+            Explore Theatres Near You. <br/>
             Book The Tickets Online.</h1>
 
             {!user && <Link

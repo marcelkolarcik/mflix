@@ -53,8 +53,8 @@ export default function MainNav(props) {
 
                         onClick={closeDrop}
                         className={' text-decoration-none nav_link_color nav-link'}
-                        to={`/theaters`}>
-                        Theaters
+                        to={`/theatres`}>
+                        Theatres
                     </Link>
                     <Nav className="me-auto">
                         {/*<Link className='mx-3 nav-link text-light ' to={'/'}>Places to stay</Link>*/}
@@ -139,7 +139,7 @@ export default function MainNav(props) {
                             :
                             <>
                                 <NavLink
-                                    className='login_btn btn btn-outline-info mx-2 nav_link_color small mb-2 mb-sm-0'
+                                    className='login_btn btn btn-outline-info mx-2  small mb-2 mb-sm-0'
                                     onClick={closeDrop}
                                     to={'/login'}>
                                     Sign In

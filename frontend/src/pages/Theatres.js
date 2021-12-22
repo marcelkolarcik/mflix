@@ -1,10 +1,10 @@
 import React, {useEffect, useState} from "react";
-import TheatersMap from "../components/theaters/TheatersMap";
+import TheatresMap from "../components/theatres/TheatresMap";
 import MovieScroller from "../components/movies/MovieScroller";
 import {Link} from 'react-router-dom'
 
 
-export default function Theaters(props) {
+export default function Theatres(props) {
     const [isLoading, setIsLoading] = useState(true);
     const [markers, setMarkers] = useState([]);
     const [isClicked, setIsClicked] = useState(false)
@@ -60,13 +60,13 @@ export default function Theaters(props) {
     if (isLoading) {
         return (
             <>
-                <TheatersMap/>
+                <TheatresMap/>
             </>)
     } else {
         return (
             <>
 
-                <TheatersMap
+                <TheatresMap
                     markers={markers}
                     onclick={showOnTheAir}
                     setTheaterId={setTheaterId}
@@ -78,7 +78,7 @@ export default function Theaters(props) {
                         <p className=" text-light text-center " style={{marginTop:'-50px'}}>
                             <Link
                                 to={`/theater/${theaterId}?movies=${theaterMovies}`}
-                                className={'text-decoration-none btn btn-outline-info p-0 px-4 py-1 pt-0 mt-0'}>BOOK NOW</Link>
+                                className={'text-decoration-none btn btn-outline-info mb-5'}>BOOK NOW</Link>
                         </p>
                     </>}
                 />
