@@ -9,10 +9,10 @@ export default function LandingTitle() {
 
     return (
         <>
-            <h1 className={'fw-light'}>Find Movies & TV Shows</h1>
-            <h4 className="text-light">
-                Browse and Read all about your favorite movies & series for free!
-            </h4>
+            <h1 className={'fw-light'}>Find Movies & TV Shows. <br/>
+            Explore Theaters Near You. <br/>
+            Book The Tickets Online.</h1>
+
             {!user && <Link
                 className='login_btn btn btn-outline-info mx-2 nav_link_color small mb-2 mb-sm-0'
                 to={'/login?next=/'}>
